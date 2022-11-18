@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { addTodo } from "./store/todo";
+import { useDispatch, useSelector } from "react-redux";
+import { Fragment } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+  const { todos } = useSelector((state) => state.todo);
+
+  const handleSubmit = () => {
+    dispatch(
+      addTodo({
+        label: "Learn redux today !",
+      })
+    );
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <button onClick={handleSubmit}>add</button>
+      <pre>{JSON.stringify(todos, null, 4)}</pre>
+    </Fragment>
   );
 }
 
